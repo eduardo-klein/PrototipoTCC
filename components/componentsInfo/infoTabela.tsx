@@ -25,7 +25,7 @@ export default function InfoTabela() {
           openPrice: crypto.current_price,
           highPrice: crypto.high_24h,
           lowPrice: crypto.low_24h,
-          quantity: crypto.total_volume, // Ou outros dados relevantes
+          quantity: crypto.total_volume,
         }));
         setCryptoData(formattedData);
       })
@@ -33,39 +33,36 @@ export default function InfoTabela() {
   }, []);
 
   return (
-    <div>
+    <div className="container">
       <h2 className='py-3'>Destaques</h2>
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>Ícone</th>
-            <th>Nome</th>
-            <th>Preço de Abertura</th>
-            <th>Maior Preço</th>
-            <th>Menor Preço</th>
-            <th>Quantidade</th>
-          </tr>
-        </thead>
-        <tbody>
-          {cryptoData.map((crypto) => (
-            <tr key={crypto.id}>
-              <td>
-                <img src={crypto.icon} alt={crypto.name} width="32" height="32" />
-              </td>
-              <td>{crypto.name}</td>
-              <td>${crypto.openPrice}</td>
-              <td>${crypto.highPrice}</td>
-              <td>${crypto.lowPrice}</td>
-              <td>{crypto.quantity}</td>
+      <div className="table-responsive">
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th>Ícone</th>
+              <th>Nome</th>
+              <th>Preço de Abertura</th>
+              <th>Maior Preço</th>
+              <th>Menor Preço</th>
+              <th>Quantidade</th>
             </tr>
-          ))}
-        </tbody>
-      </Table>
+          </thead>
+          <tbody>
+            {cryptoData.map((crypto) => (
+              <tr key={crypto.id}>
+                <td>
+                  <img src={crypto.icon} alt={crypto.name} width="32" height="32" />
+                </td>
+                <td>{crypto.name}</td>
+                <td>${crypto.openPrice}</td>
+                <td>${crypto.highPrice}</td>
+                <td>${crypto.lowPrice}</td>
+                <td>{crypto.quantity}</td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      </div>
     </div>
   );
 }
-
-
-
-
-

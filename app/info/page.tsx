@@ -4,7 +4,7 @@ import { Container } from "react-bootstrap";
 
 const info=()=>{
     return(
-        <Container>
+        <Container className="">
             <InfoTabela></InfoTabela>
 
         </Container>
