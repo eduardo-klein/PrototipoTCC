@@ -142,12 +142,8 @@ function AccordionEntenda(){
                          os principais são: a mineração, que foi previamente analisada e 
                          explicada, o staking, o lending (inglês para empréstimo) e liquidity pools 
                          (piscinas de liquidez).
-                        </Accordion.Body>
-                    </Accordion>
 
-
-                    
-                    <Accordion defaultActiveKey={['0']} className="py-2 ">
+                         <Accordion defaultActiveKey={['0']} className="py-2 ">
                         <Accordion.Header className="border" onClick={()=>controlaSecao('8')}>
                             Staking:
                         </Accordion.Header>
@@ -197,7 +193,18 @@ function AccordionEntenda(){
                         no mercado.
                         </Accordion.Body>
                     </Accordion>
+                    
 
+
+
+
+
+                        </Accordion.Body>
+                    </Accordion>
+
+
+                    
+                    
                     
                     <Accordion defaultActiveKey={['0']} className="py-2 ">
                         <Accordion.Header className="border" onClick={()=>controlaSecao('11')}>
