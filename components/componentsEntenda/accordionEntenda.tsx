@@ -194,18 +194,9 @@ function AccordionEntenda(){
                         </Accordion.Body>
                     </Accordion>
                     
-
-
-
-
-
                         </Accordion.Body>
                     </Accordion>
 
-
-                    
-                    
-                    
                     <Accordion defaultActiveKey={['0']} className="py-2 ">
                         <Accordion.Header className="border" onClick={()=>controlaSecao('11')}>
                             Rendimento ativo:
