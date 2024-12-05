@@ -6,7 +6,7 @@ const info=()=>{
     return(
         <Container className="">
             <InfoTabela></InfoTabela>
-
+        
         </Container>
         
     )

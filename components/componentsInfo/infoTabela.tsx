@@ -1,10 +1,13 @@
-'use client'
+"use client";
+
 import React, { useEffect, useState } from 'react';
-import { Table } from 'react-bootstrap';
+import { Table, Button } from 'react-bootstrap';
 import axios from 'axios';
+import LineChartComponent from '../componentsInfo/graficoMoeda';
 
 export default function InfoTabela() {
   const [cryptoData, setCryptoData] = useState([]);
+  const [selectedCrypto, setSelectedCrypto] = useState(null);
 
   useEffect(() => {
     axios
@@ -32,37 +35,64 @@ export default function InfoTabela() {
       .catch((error) => console.error('Erro ao buscar dados de criptomoedas:', error));
   }, []);
 
+  const handleRowClick = (crypto) => {
+    axios
+      .get(`https://api.coingecko.com/api/v3/coins/${crypto.id}/market_chart?vs_currency=usd&days=30&interval=daily`)
+      .then((response) => {
+        const prices = response.data.prices.map((price) => price[1]);
+        setSelectedCrypto({ ...crypto, prices });
+      })
+      .catch((error) => console.error('Erro ao buscar dados de preços históricos:', error));
+  };
+
+  const handleBackClick = () => {
+    setSelectedCrypto(null); // Reseta o estado para mostrar a tabela novamente
+  };
+
   return (
     <div className="container">
       <h2 className='py-3'>Destaques</h2>
-      <div className="table-responsive">
-        <Table striped bordered hover>
-          <thead>
-            <tr>
-              <th>Ícone</th>
-              <th>Nome</th>
-              <th>Preço de Abertura</th>
-              <th>Maior Preço</th>
-              <th>Menor Preço</th>
-              <th>Quantidade</th>
-            </tr>
-          </thead>
-          <tbody>
-            {cryptoData.map((crypto) => (
-              <tr key={crypto.id}>
-                <td>
-                  <img src={crypto.icon} alt={crypto.name} width="32" height="32" />
-                </td>
-                <td>{crypto.name}</td>
-                <td>${crypto.openPrice}</td>
-                <td>${crypto.highPrice}</td>
-                <td>${crypto.lowPrice}</td>
-                <td>{crypto.quantity}</td>
+      
+      {selectedCrypto ? (
+        <>
+          {/* Botão para voltar à tabela */}
+          <Button variant="secondary" onClick={handleBackClick} className="mb-3">
+            Voltar para a Tabela
+          </Button>
+
+          {/* Componente do gráfico */}
+          <LineChartComponent cryptoData={selectedCrypto} />
+        </>
+      ) : (
+        <div className="table-responsive">
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th>Ícone</th>
+                <th>Nome</th>
+                <th>Preço de Abertura</th>
+                <th>Maior Preço</th>
+                <th>Menor Preço</th>
+                <th>Quantidade</th>
               </tr>
-            ))}
-          </tbody>
-        </Table>
-      </div>
+            </thead>
+            <tbody>
+              {cryptoData.map((crypto) => (
+                <tr key={crypto.id} onClick={() => handleRowClick(crypto)}>
+                  <td>
+                    <img src={crypto.icon} alt={crypto.name} width="32" height="32" />
+                  </td>
+                  <td>{crypto.name}</td>
+                  <td>${crypto.openPrice}</td>
+                  <td>${crypto.highPrice}</td>
+                  <td>${crypto.lowPrice}</td>
+                  <td>{crypto.quantity}</td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </div>
+      )}
     </div>
   );
 }

@@ -1,10 +1,13 @@
+"use client"
 import { Container, Row } from "react-bootstrap";
 import AccordionHome from "../components/componentsHome/accordionHome";
-
+import React, {useContext} from 'react';
 import CardsHome from "../components/componentsHome/cardsHome";
+
 
 export default function home() {
     return(
+    
             <Container className="py-3">
                 <h1 className="text-center">
                     Deseja entender como funcionam <span className="text-warning">criptomoedas</span>?
@@ -18,7 +21,12 @@ export default function home() {
                     
                 
                 <AccordionHome/>
+                <div className="py-3">
+                    
+                </div>
             </Container>
+
+            
      
             
             
