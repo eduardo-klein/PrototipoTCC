@@ -33,7 +33,7 @@ function Register() {
       }
   
       if (data.success) {
-        window.location.href = '/';
+        window.location.href = '/login';
       }
     } catch (error) {
       console.error('Erro inesperado:', error);
